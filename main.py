@@ -11,7 +11,7 @@ from email import encoders
 from email.mime.text import MIMEText
 
 # Replace with your actual Telegram Bot API key
-API_KEY = "7450217483:AAGg7gwLDj7B368rT2it65B8gopfOEWPq6k"
+API_KEY = "7450217483:AAF47whHcWg4gi0OLQRcDF3iZ2rpRvMx4JY"
 DEFAULT_RECEIVER_EMAIL = 'auditbettro@rrbubgb.in'
 
 # Configure logging
