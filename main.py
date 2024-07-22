@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 import threading
 from telebot import TeleBot
 import requests
@@ -105,7 +106,7 @@ def handle_document(message):
 
     # Determine the receiver email from captions
     if not current_receiver_email:
-        current_receiver_email = caption if caption else DEFAULT_RECEIVER_EMAIL
+        current_receiver_email = caption if is_valid_email(caption) else DEFAULT_RECEIVER_EMAIL
 
     # Get file info (including download URL)
     try:
@@ -130,6 +131,13 @@ def handle_document(message):
     except Exception as e:
         logging.error(f"Error downloading or saving file: {e}")
         bot.reply_to(message, "An error occurred while saving the file.")
+
+def is_valid_email(email):
+    # Define the regular expression for a valid email address
+    regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    
+    # Use re.match to check if the email matches the regex
+    return re.match(regex, email) is not None
 
 def send_attachments():
     global attachments, current_receiver_email, timer
